@@ -376,19 +376,19 @@ app.post('/Forget_password', (request, response) => {
     Chat.query(sqlQuery, [email], (err, result) => {
         if (err) {
             console.error(err);
-            // --- FIX 1 ---
+    
             return response.status(500).send({ message: "Database error." }); 
         }
         
         if (result.length === 0) {
-            // --- FIX 2 ---
+            
             return response.status(404).send({ message: "User not found." });
         }
 
         const user = result[0];
         const jwtSecret = process.env.JWT_SECRET;
 
-        // ... JWT and Nodemailer logic proceeds here ...
+        
         
         const reset_token = jwt.sign({ id: user.id, email: user.email }, jwtSecret, { expiresIn: '10m' });
         const decoded = jwt.verify(reset_token, jwtSecret);
