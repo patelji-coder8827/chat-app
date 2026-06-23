@@ -39,7 +39,9 @@ const Chat = mysql.createConnection({
         ca: fs.readFileSync(process.env.DB_SSL_CA_PATH)
     }
 });
-
+console.log("HOST:", process.env.DB_HOST);
+console.log("PORT:", process.env.DB_PORT);
+console.log("SSL FILE:", process.env.DB_SSL_CA_PATH);
 
 Chat.connect((error) => {
     if (error) {
